@@ -1,0 +1,102 @@
+Peer-to-Peer Lending Platform Design Document
+GoMoney
+Executive Summary
+The GoMoney is an innovative fintech solution designed to provide users with a secure and convenient platform for real-time funds transfer. Leveraging the power of microservices, the project aims to showcase the seamless integration of modern technologies, such as Golang and Gin to create a robust ecosystem.
+
+ Project Scope
+Objectives
+Real time transactions: Enable users to initiate fund transfer to other users keeping speed and convenience in mind.
+•	Instant Notifications: Provide users with instantaneous updates on transactions  statuses.
+•	Security and Compliance: Implement robust security measures to safeguard user data, ensuring encrypted communications.
+•	Microservices Architecture: Demonstrate the efficacy of a microservices-based architecture in creating scalable, modular, and maintainable fintech solutions.
+Key Features
+•	User registration and authentication: User can easily create account with a process of verification to avoid spamming.
+•	Transaction Processing: Facilitate seamless and secure fund transfers between users.
+•	Balance tracking and Transaction History: Enable user to view their account balance in real time, promoting transparency and providing comprehensive record of their user’s past transactions.
+•	Payment Gateway Integration: Integrate with a trusted payment gateway to securely process transactions and enhance user confidence.
+
+
+
+
+
+
+
+
+Architecture
+
+1. Web Framework:
+•	Use a Golang web framework (such as Gin) to handle HTTP requests and route them to appropriate handlers.
+2. Database:
+•	Connect to a PostgreSQL database using Golang's database/sql package and a suitable PostgreSQL driver.
+•	Implement CRUD (Create, Read, Update, Delete) operations for users, transactions, balances, and notifications.
+3. Business Logic:
+•	Implement the core business logic of the application.
+•	Manage user registration, authentication, and password hashing.
+•	Handle transaction processing, including deducting funds from the sender's account and updating balances.
+•	Manage real-time communication and notifications using WebSocket integration.
+•	Integrate with a payment gateway for secure transaction processing.
+4. Controllers:
+•	Create controllers to handle HTTP requests and interact with the business logic.
+•	Define routes for user registration, transaction initiation, balance retrieval, and more.
+5. Models:
+•	Define Go structs to represent the entities in the database, such as users, transactions, balances, and notifications.
+•	Implement methods for querying and manipulating data in the database.
+6. Middleware:
+•	Implement middleware functions for handling authentication, logging, and request validation.
+•	Secure sensitive routes and validate user inputs before processing.
+7. WebSockets:
+•	Use the Gorilla WebSockets package to integrate WebSocket support for real-time notifications and updates.
+
+8. Security:
+•	Implement secure authentication mechanisms, such as token-based authentication, to protect user data.
+•	Hash passwords securely using established hashing algorithms.
+9. Deployment: - Containerize your Golang application using Docker for easier deployment. - Deploy the application to a cloud server or hosting platform.
+
+
+ Data Model
+https://dbdiagram.io/d/64ecfb4302bd1c4a5e8ea35a
+
+
+Microservices Description
+1. User Management Microservice:
+•	Responsibilities:
+•	Handles user registration, login, and authentication.
+•	Manages user profiles and account information.
+•	Functionalities:
+•	Provides APIs for user registration, login, and profile management.
+•	Generates and verifies authentication tokens.
+•	Stores and retrieves user data, including email, password hash, and user details.
+2. Transaction Microservice:
+•	Responsibilities:
+•	Manages the initiation, processing, and tracking of financial transactions.
+•	Functionalities:
+•	Receives requests to initiate transactions between users.
+•	Validates transaction details and user account balances.
+•	Updates sender's and recipient's balances after successful transactions.
+•	Calculates and applies transaction fees as needed.
+•	Stores transaction records with relevant details.
+3. Balance Management Microservice:
+•	Responsibilities:
+•	Tracks user account balances and transaction history in real time.
+•	Functionalities:
+•	Stores and updates user account balances after each transaction.
+•	Retrieves current balance for a given user.
+•	Stores and manages transaction history for each user.
+•	Provides APIs for retrieving balance and transaction history.
+4. Notification Microservice:
+•	Responsibilities:
+•	Facilitates real-time communication through WebSocket integration.
+•	Sends immediate notifications to users regarding transaction statuses and account activities.
+•	Functionalities:
+•	Manages WebSocket connections for active users.
+•	Sends real-time notifications to users about transaction updates and account changes.
+•	Integrates with other microservices to gather notification content.
+5. API Gateway Microservice:
+•	Responsibilities:
+•	Acts as the entry point for user requests, handling authentication and routing.
+•	Functionalities:
+•	Authenticates incoming requests and validates tokens.
+•	Routes requests to appropriate microservices based on the requested functionality.
+•	Aggregates data from multiple microservices for responses.
+•	Provides a unified API interface to clients.
+
